@@ -1,9 +1,9 @@
-const User = require('../models/User');
+import User from '../models/User.js';
 
 // @desc    Update vet profile (availability, etc.)
 // @route   PUT /api/v1/vets/profile
 // @access  Private (vet)
-exports.updateVetProfile = async (req, res, next) => {
+export const updateVetProfile = async (req, res, next) => {
   if (req.user.role !== 'vet') {
     return res.status(403).json({ message: 'Not authorized' });
   }
@@ -22,7 +22,7 @@ exports.updateVetProfile = async (req, res, next) => {
 // @desc    Get vet profile
 // @route   GET /api/v1/vets/profile
 // @access  Private (vet)
-exports.getVetProfile = async (req, res, next) => {
+export const getVetProfile = async (req, res, next) => {
   if (req.user.role !== 'vet') {
     return res.status(403).json({ message: 'Not authorized' });
   }

@@ -1,12 +1,12 @@
-const express = require('express');
-const {
+import express from "express";
+import {
   getPets,
   getPet,
   createPet,
   updatePet,
   deletePet,
-} = require('../controllers/petController');
-const { protect, authorize } = require('../middlewares/auth');
+} from '../controllers/petController.js';
+import { protect, authorize } from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -18,5 +18,4 @@ router
   .get(getPet)
   .put(authorize('owner'), updatePet)
   .delete(authorize('owner'), deletePet);
-
-module.exports = router; // ✅ Correct export
+export default router; 

@@ -1,18 +1,18 @@
-const express = require('express');
-const {
+import express from "express";
+import  {
   createAdoptionListing,
   getAdoptables,
   logCareActivity,
-} = require('../controllers/shelterController');
-const { protect, authorize } = require('../middlewares/auth');
+} from '../controllers/shelterController.js';
+import  { protect, authorize } from '../middlewares/auth.js';
 
 const router = express.Router();
 
-router.route('/adoptables').get(getAdoptables);
+router.get('/adoptables', getAdoptables);
 
 router.use(protect, authorize('shelter'));
 
-router.route('/adoptables').post(createAdoptionListing);
-router.route('/adoptables/:id/log').post(logCareActivity);
+router.post('/create-adoptables', createAdoptionListing);
+router.post('/adoptables/:id/log', logCareActivity);
 
-module.exports = router; // ✅ Correct export
+export default router; 

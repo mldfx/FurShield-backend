@@ -1,10 +1,10 @@
-const AdoptionListing = require('../models/AdoptionListing');
-const { sendNotification } = require('../utils/notifications');
+import AdoptionListing from '../models/AdoptionListing.js';
+import { sendNotification } from '../utils/notifications.js';
 
 // @desc    Create adoption listing
 // @route   POST /api/v1/shelters/adoptables
 // @access  Private (shelter)
-exports.createAdoptionListing = async (req, res, next) => {
+export const createAdoptionListing = async (req, res, next) => {
   if (req.user.role !== 'shelter') {
     return res.status(403).json({ message: 'Not authorized' });
   }
@@ -22,7 +22,7 @@ exports.createAdoptionListing = async (req, res, next) => {
 // @desc    Get all adoptable pets
 // @route   GET /api/v1/shelters/adoptables
 // @access  Public
-exports.getAdoptables = async (req, res, next) => {
+export const getAdoptables = async (req, res, next) => {
   const listings = await AdoptionListing.find({ status: 'Available' }).populate('shelter', 'name');
 
   res.status(200).json({
@@ -35,7 +35,7 @@ exports.getAdoptables = async (req, res, next) => {
 // @desc    Update care log for pet
 // @route   POST /api/v1/shelters/adoptables/:id/log
 // @access  Private (shelter)
-exports.logCareActivity = async (req, res, next) => {
+export const logCareActivity = async (req, res, next) => {
   const listing = await AdoptionListing.findById(req.params.id);
 
   if (!listing) {

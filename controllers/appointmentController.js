@@ -1,13 +1,10 @@
-const Appointment = require('../models/Appointment');
-const Pet = require('../models/Pet');
-const User = require('../models/User');
-const { sendNotification } = require('../utils/notifications');
-const sendEmail = require('../utils/sendEmail');
+import Appointment from '../models/Appointment.js';
+// import Pet from '../models/Pet.js';
+import User from '../models/User.js';
+import { sendNotification } from '../utils/notifications.js';
+import {sendEmail} from '../utils/sendEmail.js';
 
-// @desc    Book appointment
-// @route   POST /api/v1/appointments
-// @access  Private (owner)
-exports.bookAppointment = async (req, res, next) => {
+export const bookAppointment = async (req, res) => {
   const { pet, vet, appointmentTime } = req.body;
 
   const appointment = await Appointment.create({
@@ -33,10 +30,8 @@ exports.bookAppointment = async (req, res, next) => {
   });
 };
 
-// @desc    Get appointments for user
-// @route   GET /api/v1/appointments/me
-// @access  Private
-exports.getMyAppointments = async (req, res, next) => {
+
+export const getMyAppointments = async (req, res) => {
   let query;
 
   if (req.user.role === 'owner') {
@@ -59,7 +54,7 @@ exports.getMyAppointments = async (req, res, next) => {
 // @desc    Update appointment (approve/reschedule/cancel)
 // @route   PUT /api/v1/appointments/:id
 // @access  Private (vet for approve/reschedule, owner or vet for cancel)
-exports.updateAppointment = async (req, res, next) => {
+export const updateAppointment = async (req, res) => {
   let appointment = await Appointment.findById(req.params.id).populate('owner pet vet');
 
   if (!appointment) {

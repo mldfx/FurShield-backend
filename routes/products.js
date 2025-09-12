@@ -1,12 +1,13 @@
-const express = require('express');
-const {
+import express from "express";
+
+import  {
   getProducts,
   getProduct,
   addToCart,
   viewCart,
   removeFromCart,
-} = require('../controllers/productController');
-const { protect } = require('../middlewares/auth');
+} from '../controllers/productController.js';
+import  { protect } from '../middlewares/auth.js';
 
 const router = express.Router();
 
@@ -18,4 +19,4 @@ router.use(protect);
 router.route('/cart').get(viewCart).post(addToCart);
 router.route('/cart/:index').delete(removeFromCart);
 
-module.exports = router; // ✅ Correct export
+export default router;

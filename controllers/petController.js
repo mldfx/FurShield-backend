@@ -1,10 +1,9 @@
-const Pet = require('../models/Pet');
-const User = require('../models/User');
-
+import Pet from '../models/Pet.js';
+import User from '../models/User.js';
 // @desc    Get all pets for logged-in owner
 // @route   GET /api/v1/pets
 // @access  Private (owner)
-exports.getPets = async (req, res, next) => {
+export const getPets = async (req, res, next) => {
   const pets = await Pet.find({ owner: req.user.id });
 
   res.status(200).json({
@@ -17,7 +16,7 @@ exports.getPets = async (req, res, next) => {
 // @desc    Get single pet
 // @route   GET /api/v1/pets/:id
 // @access  Private (owner)
-exports.getPet = async (req, res, next) => {
+export const getPet = async (req, res, next) => {
   const pet = await Pet.findById(req.params.id).populate('medicalHistory');
 
   if (!pet) {
@@ -37,7 +36,7 @@ exports.getPet = async (req, res, next) => {
 // @desc    Create pet
 // @route   POST /api/v1/pets
 // @access  Private (owner)
-exports.createPet = async (req, res, next) => {
+export const createPet = async (req, res, next) => {
   req.body.owner = req.user.id;
 
   const pet = await Pet.create(req.body);
@@ -51,7 +50,7 @@ exports.createPet = async (req, res, next) => {
 // @desc    Update pet
 // @route   PUT /api/v1/pets/:id
 // @access  Private (owner)
-exports.updatePet = async (req, res, next) => {
+export const updatePet = async (req, res, next) => {
   let pet = await Pet.findById(req.params.id);
 
   if (!pet) {
@@ -76,7 +75,7 @@ exports.updatePet = async (req, res, next) => {
 // @desc    Delete pet
 // @route   DELETE /api/v1/pets/:id
 // @access  Private (owner)
-exports.deletePet = async (req, res, next) => {
+export const deletePet = async (req, res, next) => {
   const pet = await Pet.findById(req.params.id);
 
   if (!pet) {

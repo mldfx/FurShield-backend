@@ -1,9 +1,10 @@
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const User = require('../models/User');
-const Pet = require('../models/Pet');
-const Product = require('../models/Product');
-const AdoptionListing = require('../models/AdoptionListing');
+import mongoose from 'mongoose';
+import dotenv from "dotenv";
+import User from "../models/User.js"
+import Pet from "../models/Pet.js";
+import Product from '../models/Product.js';
+import AdoptionListing from '../models/AdoptionListing.js';
+
 
 dotenv.config({ path: '../.env' });
 

@@ -1,17 +1,11 @@
-const express = require('express');
-const {
-  bookAppointment,
-  getMyAppointments,
-  updateAppointment,
-} = require('../controllers/appointmentController');
-const { protect } = require('../middlewares/auth');
+import express from "express";
+import { bookAppointment, getMyAppointments, updateAppointment } from "../controllers/appointmentController.js";
+import { protect } from "../middlewares/auth.js";
+const router = express.Router()
 
-const router = express.Router();
+router.post("/", protect, bookAppointment)
+router.get("/me", protect, getMyAppointments)
+router.post("/:id", protect, updateAppointment)
 
-router.use(protect);
 
-router.route('/').post(bookAppointment);
-router.route('/me').get(getMyAppointments);
-router.route('/:id').put(updateAppointment);
-
-module.exports = router; // ✅ Correct export
+export default router;

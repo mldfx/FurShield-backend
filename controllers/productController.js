@@ -1,9 +1,8 @@
-const Product = require('../models/Product');
-
+import Product from "../models/Product.js";
 // @desc    Get all products
 // @route   GET /api/v1/products
 // @access  Public
-exports.getProducts = async (req, res, next) => {
+export const getProducts = async (req, res, next) => {
   const { category } = req.query;
 
   let query = Product.find();
@@ -24,7 +23,7 @@ exports.getProducts = async (req, res, next) => {
 // @desc    Get single product
 // @route   GET /api/v1/products/:id
 // @access  Public
-exports.getProduct = async (req, res, next) => {
+export const getProduct = async (req, res, next) => {
   const product = await Product.findById(req.params.id);
 
   if (!product) {
@@ -43,7 +42,7 @@ let carts = {};
 // @desc    Add to cart
 // @route   POST /api/v1/products/cart
 // @access  Private
-exports.addToCart = async (req, res, next) => {
+export const addToCart = async (req, res, next) => {
   const { productId, quantity } = req.body;
 
   if (!carts[req.user.id]) {
@@ -62,7 +61,7 @@ exports.addToCart = async (req, res, next) => {
 // @desc    View cart
 // @route   GET /api/v1/products/cart
 // @access  Private
-exports.viewCart = async (req, res, next) => {
+export const viewCart = async (req, res, next) => {
   const cart = carts[req.user.id] || [];
 
   res.status(200).json({
@@ -74,7 +73,7 @@ exports.viewCart = async (req, res, next) => {
 // @desc    Remove from cart
 // @route   DELETE /api/v1/products/cart/:index
 // @access  Private
-exports.removeFromCart = async (req, res, next) => {
+export const removeFromCart = async (req, res, next) => {
   if (!carts[req.user.id]) {
     return res.status(404).json({ message: 'Cart empty' });
   }

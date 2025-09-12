@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const AdoptionListingSchema = new mongoose.Schema({
   shelter: {
@@ -51,4 +51,5 @@ const AdoptionListingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('AdoptionListing', AdoptionListingSchema);
+const AdoptionListing = mongoose.model('AdoptionListing', AdoptionListingSchema);
+export default AdoptionListing

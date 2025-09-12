@@ -1,4 +1,4 @@
-const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, next) => {
   let error = { ...err };
   error.message = err.message;
 
@@ -34,5 +34,3 @@ class ErrorResponse extends Error {
     this.statusCode = statusCode;
   }
 }
-
-module.exports = errorHandler;

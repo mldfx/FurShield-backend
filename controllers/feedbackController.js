@@ -1,9 +1,9 @@
-const Feedback = require('../models/Feedback');
+import Feedback from '../models/Feedback.js';
 
 // @desc    Submit feedback/rating
 // @route   POST /api/v1/feedback
 // @access  Private
-exports.submitFeedback = async (req, res, next) => {
+export const submitFeedback = async (req, res, next) => {
   const { targetId, onModel, rating, comment } = req.body;
 
   const feedback = await Feedback.create({
@@ -23,7 +23,7 @@ exports.submitFeedback = async (req, res, next) => {
 // @desc    Get feedback for target
 // @route   GET /api/v1/feedback/:model/:id
 // @access  Public
-exports.getFeedback = async (req, res, next) => {
+export const getFeedback = async (req, res, next) => {
   const feedbacks = await Feedback.find({
     onModel: req.params.model,
     targetId: req.params.id,

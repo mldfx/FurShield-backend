@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const HealthRecordSchema = new mongoose.Schema({
   pet: {
@@ -41,4 +41,5 @@ const HealthRecordSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('HealthRecord', HealthRecordSchema);
+const HealthRecord= mongoose.model('HealthRecord', HealthRecordSchema);
+export default HealthRecord;

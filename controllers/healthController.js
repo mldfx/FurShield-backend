@@ -1,10 +1,10 @@
-const HealthRecord = require('../models/HealthRecord');
-const Pet = require('../models/Pet');
+import Pet from '../models/Pet.js';
+import HealthRecord from '../models/HealthRecord.js';
 
 // @desc    Create health record
 // @route   POST /api/v1/health
 // @access  Private (vet)
-exports.createHealthRecord = async (req, res, next) => {
+export const createHealth = async (req, res, next) => {
   const { pet, visitDate, diagnosis, treatment, insuranceDetails } = req.body;
 
   const record = await HealthRecord.create({
@@ -30,7 +30,7 @@ exports.createHealthRecord = async (req, res, next) => {
 // @desc    Get health records for pet
 // @route   GET /api/v1/health/pet/:petId
 // @access  Private (owner or vet)
-exports.getHealthRecordsByPet = async (req, res, next) => {
+export const getHealthRecordsByPet = async (req, res, next) => {
   const records = await HealthRecord.find({ pet: req.params.petId }).populate('vet', 'name');
 
   res.status(200).json({
@@ -43,7 +43,7 @@ exports.getHealthRecordsByPet = async (req, res, next) => {
 // @desc    Upload documents to health record
 // @route   POST /api/v1/health/:id/upload
 // @access  Private (vet)
-exports.uploadDocuments = async (req, res, next) => {
+export const uploadDocuments = async (req, res, next) => {
   // Multer will handle file upload → req.file
   if (!req.file) {
     return res.status(400).json({ message: 'Please upload a file' });
